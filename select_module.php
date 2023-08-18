@@ -57,7 +57,7 @@ $punten = $moduleID !== null ? $systeem->getPuntenPerModule($moduleID) : [];
                             <?= $punt['person']->getVoornaam() ?>
                         </td>
                         <td>
-                            <?= $punt['punt'] ?>
+                            <?= $punt['punt']->getPunt() ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
