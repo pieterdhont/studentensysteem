@@ -15,25 +15,4 @@
 DROP USER 'cursusgebruiker'@'localhost';
 CREATE USER 'cursusgebruiker'@'localhost' IDENTIFIED BY 'cursuspwd';
 GRANT ALL PRIVILEGES ON cursusphp.* TO 'cursusgebruiker'@'localhost';
-
-en eventueel 
-
-FLUSH PRIVILEGES;
     </pre>
-    <p>Bij deze laatste kan de volgende foutmelding voorkomen:</p>
-    <blockquote>#1030 - Fout 176 "Read page with wrong checksum" van tabel handler Aria</blockquote>
-    <p> Volg in dat geval de volgende stappen:</p>
-    <ol>
-        <li>Stop de MySQL-Server: Sluit de MySQL-server af om te voorkomen dat er wijzigingen worden aangebracht terwijl je de tabellen controleert en herstelt.</li>
-        <li>Open de Command Prompt</li>
-        <li>Navigeer naar de MySQL-Bin Directory: Gebruik het cd commando om naar de directory te navigeren waar aria_chk zich bevindt, meestal in de bin map van je MySQL-installatie (bijv. C:\xampp\mysql\bin).</li>
-        <li>Controleer de Integriteit van de Aria-Tabellen: Voer het volgende commando uit om de integriteit van de Aria-tabellen te controleren:
-            <pre>aria_chk -c C:\xampp\mysql\data\mysql\*.MAI</pre>
-        </li>
-        <li>Herstel de Beschadigde Tabellen: Als er corruptie wordt gedetecteerd, voer dan het volgende commando uit om de beschadigde tabellen te herstellen:
-            <pre>aria_chk -r C:\xampp\mysql\data\mysql\*.MAI</pre>
-        </li>
-        <li>Start de MySQL-Server opnieuw op: Nadat de tabellen zijn hersteld, start je de MySQL-server opnieuw om de wijzigingen door te voeren.</li>
-    </ol>
-</body>
-</html>
