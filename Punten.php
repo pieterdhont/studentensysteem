@@ -78,12 +78,13 @@ class PuntenService
         $stmt = $this->db->prepare($query);
         $stmt->execute([':moduleID' => $moduleID]);
 
-        $punten = [];
+       $punten = [];
         foreach ($stmt as $row) {
             $person = new Person($row['person_id'], $row['familienaam'], $row['voornaam']);
             $punt = new Punten((int) $row['moduleID'], (int) $row['persoonID'], (int) $row['punt']);
             $punten[] = ['punt' => $punt, 'person' => $person];
         }
+
         return $punten;
     }
 
