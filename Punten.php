@@ -81,14 +81,9 @@ class PuntenService
         $punten = [];
         foreach ($stmt as $row) {
             $person = new Person($row['person_id'], $row['familienaam'], $row['voornaam']);
-            $punten[] = [
-                'moduleID' => (int) $row['moduleID'],
-                'persoonID' => (int) $row['persoonID'],
-                'punt' => (int) $row['punt'],
-                'person' => $person,
-            ];
+            $punt = new Punten((int) $row['moduleID'], (int) $row['persoonID'], (int) $row['punt']);
+            $punten[] = ['punt' => $punt, 'person' => $person];
         }
-
         return $punten;
     }
 
@@ -105,12 +100,8 @@ class PuntenService
         $punten = [];
         foreach ($stmt as $row) {
             $module = new Module($row['module_id'], $row['module_naam']);
-            $punten[] = [
-                'moduleID' => (int) $row['moduleID'],
-                'persoonID' => (int) $row['persoonID'],
-                'punt' => (int) $row['punt'],
-                'module' => $module,
-            ];
+            $punt = new Punten((int) $row['moduleID'], (int) $row['persoonID'], (int) $row['punt']);
+            $punten[] = ['punt' => $punt, 'module' => $module];
         }
 
         return $punten;
