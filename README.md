@@ -15,6 +15,9 @@
 DROP USER 'cursusgebruiker'@'localhost';
 CREATE USER 'cursusgebruiker'@'localhost' IDENTIFIED BY 'cursuspwd';
 GRANT ALL PRIVILEGES ON cursusphp.* TO 'cursusgebruiker'@'localhost';
+
+en eventueel 
+
 FLUSH PRIVILEGES;
     </pre>
     <p>Bij deze laatste kan de volgende foutmelding voorkomen:</p>
