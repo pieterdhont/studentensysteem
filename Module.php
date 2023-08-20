@@ -3,6 +3,7 @@
 // Module.php
 declare(strict_types=1);
 
+require_once 'DatabaseConnectionHandler.php';
 class Module
 {
     private $id;
@@ -25,15 +26,8 @@ class Module
     }
 }
 
-class ModuleService
+class ModuleService extends DatabaseConnectionHandler
 {
-    private $db;
-
-    public function __construct(PDO $db)
-    {
-        $this->db = $db;
-    }
-
     public function getModules(): array
     {
         $query = "SELECT id, naam FROM modules ORDER BY naam ASC";
