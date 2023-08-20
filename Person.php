@@ -3,11 +3,14 @@
 // Person.php
 declare(strict_types=1);
 
+require_once 'DatabaseConnectionHandler.php';
+
 class Person
 {
     private $id;
     private $familienaam;
     private $voornaam;
+
 
     public function __construct(int $id, string $familienaam, string $voornaam)
     {
@@ -32,28 +35,23 @@ class Person
     }
 }
 
-class PersonService
+class PersonService extends DatabaseConnectionHandler
 {
-    private $db;
-
-    public function __construct(PDO $db)
-    {
-        $this->db = $db;
-    }
-
     public function getPersonen(): array
-{
-    $query = "SELECT id, familienaam, voornaam FROM personen ORDER BY familienaam ASC";
-    $stmt = $this->db->prepare($query);
-    $stmt->execute();
+    {
+        $query = "SELECT id, familienaam, voornaam FROM personen ORDER BY familienaam ASC";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
 
-    $personen = [];
-    foreach ($stmt as $row) {
-        $personen[] = new Person((int)$row['id'], $row['familienaam'], $row['voornaam']);
+
+        $personen = [];
+        foreach ($stmt as $row) {
+            $personen[] = new Person((int) $row['id'], $row['familienaam'], $row['voornaam']);
+        }
+
+        return $personen;
+
     }
-
-    return $personen;
-}
 
     public function getPersoonName(int $persoonID): string
     {
@@ -62,4 +60,6 @@ class PersonService
         $stmt->execute([':persoonID' => $persoonID]);
         return $stmt->fetchColumn();
     }
+
+
 }
