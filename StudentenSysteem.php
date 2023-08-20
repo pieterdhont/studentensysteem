@@ -3,6 +3,7 @@
 
 declare(strict_types=1);
 
+require_once 'db.php';
 require_once 'Module.php';
 require_once 'Person.php';
 require_once 'Punten.php';
