@@ -4,7 +4,6 @@
 
 declare(strict_types=1);
 
-require_once 'db.php';
 require_once 'StudentenSysteem.php';
 
 $systeem = new StudentenSysteem($db);
