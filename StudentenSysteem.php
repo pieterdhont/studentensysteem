@@ -3,21 +3,22 @@
 
 declare(strict_types=1);
 
-require_once 'db.php';
+
 require_once 'Module.php';
 require_once 'Person.php';
 require_once 'Punten.php';
+require_once 'DatabaseConnectionHandler.php';
 
-class StudentenSysteem
+class StudentenSysteem extends DatabaseConnectionHandler
 {
-    private $db;
+    
     private $puntenService;
     private $moduleService;
     private $personService;
 
     public function __construct(PDO $db)
     {
-        $this->db = $db;
+        parent::__construct($db);
         $this->puntenService = new PuntenService($db);
         $this->moduleService = new ModuleService($db);
         $this->personService = new PersonService($db);
@@ -63,6 +64,6 @@ class StudentenSysteem
         return $this->puntenService->getPuntenPerPersoon($persoonID);
     }
 
-    
-    
+
+
 }
