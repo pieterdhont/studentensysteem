@@ -23,6 +23,11 @@ class StudentenSysteem
         $this->personService = new PersonService($db);
     }
 
+    public function __destruct()
+    {
+        $this->db = null;
+    }
+
     public function voegPuntToe(int $moduleID, int $persoonID, int $punt): string
     {
         return $this->puntenService->voegPuntToe($moduleID, $persoonID, $punt);
