@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+require_once 'DatabaseConnectionHandler.php';
+
 class Punten
 {
     private $moduleID;
@@ -32,17 +34,11 @@ class Punten
     }
 }
 
-class PuntenService
+class PuntenService extends DatabaseConnectionHandler
 {
     private const MIN_PUNT = 0;
     private const MAX_PUNT = 100;
 
-    private $db;
-
-    public function __construct(PDO $db)
-    {
-        $this->db = $db;
-    }
 
     public function voegPuntToe(int $moduleID, int $persoonID, int $punt): string
     {
@@ -78,7 +74,7 @@ class PuntenService
         $stmt = $this->db->prepare($query);
         $stmt->execute([':moduleID' => $moduleID]);
 
-       $punten = [];
+        $punten = [];
         foreach ($stmt as $row) {
             $person = new Person($row['person_id'], $row['familienaam'], $row['voornaam']);
             $punt = new Punten((int) $row['moduleID'], (int) $row['persoonID'], (int) $row['punt']);
@@ -107,5 +103,6 @@ class PuntenService
 
         return $punten;
     }
+
+
 }
- 
