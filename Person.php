@@ -43,7 +43,7 @@ class PersonService
 
     public function getPersonen(): array
 {
-    $query = "SELECT * FROM personen ORDER BY familienaam ASC";
+    $query = "SELECT id, familienaam, voornaam FROM personen ORDER BY familienaam ASC";
     $stmt = $this->db->prepare($query);
     $stmt->execute();
 
