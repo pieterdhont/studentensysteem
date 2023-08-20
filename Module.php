@@ -36,7 +36,7 @@ class ModuleService
 
     public function getModules(): array
     {
-        $query = "SELECT * FROM modules ORDER BY naam ASC";
+        $query = "SELECT id, naam FROM modules ORDER BY naam ASC";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
